@@ -1,5 +1,6 @@
 package com.diefisheye.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.diefisheye.coolweather.gson.Forecast;
 import com.diefisheye.coolweather.gson.Weather;
+import com.diefisheye.coolweather.service.AutoUpdateService;
 import com.diefisheye.coolweather.util.HttpUtil;
 import com.diefisheye.coolweather.util.Utility;
 
@@ -105,7 +107,6 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
     }
-
     /**
      * 根据天气id请求城市天气信息
      */
@@ -210,5 +211,7 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 }
